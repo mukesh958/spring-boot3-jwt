@@ -20,19 +20,19 @@ public class UserInfoUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    	/*Optional<UserInfo> userInfo = repository.findByName(username);
 		
-		 * return userInfo.map(UserInfoUserDetails::new) .orElseThrow(() -> new
-		 * UsernameNotFoundException("user not found " + username));
-		 */
-        PasswordEncoder p=new BCryptPasswordEncoder();
-    	String str=p.encode("12345");
     	Optional<UserInfo> userInfo = repository.findByName(username);
-        
-        UserInfo info=userInfo.get();
-        info.setPassword(str);
-        
-        UserInfoUserDetails userDetails= new UserInfoUserDetails(userInfo.get());
-        return userDetails;
+		return userInfo.map(UserInfoUserDetails::new)
+				.orElseThrow(() -> new UsernameNotFoundException("user not found " + username));
+		 
+			/*
+			 * PasswordEncoder p=new BCryptPasswordEncoder(); String str=p.encode("12345");
+			 * Optional<UserInfo> userInfo = repository.findByName(username);
+			 * 
+			 * UserInfo info=userInfo.get(); info.setPassword(str);
+			 * 
+			 * UserInfoUserDetails userDetails= new UserInfoUserDetails(userInfo.get());
+			 * return userDetails;
+			 */
     }
 }

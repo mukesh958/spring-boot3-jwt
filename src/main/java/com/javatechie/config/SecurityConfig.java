@@ -46,9 +46,29 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
+       
+    	 http
+         .csrf(csrf -> csrf.disable())
+         .authorizeHttpRequests(auth -> auth
+             .requestMatchers(
+                 "/auth/login", "/auth/register","/actuator/info**","/actuator/health**","/actuator/prometheus**",
+                 "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/swagger-ui/index.html",
+                 "/swagger-resources/**", "/webjars/**", "/v2/api-docs",
+                 "/api/v1/token"
+             ).permitAll()
+             .anyRequest().authenticated()
+         )
+         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+         .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
+
+     return http.build();
+    	
+    	/*return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/products/new","/products/authenticate").permitAll()
+                .requestMatchers("/auth/login", "/auth/register","/actuator/info**","/actuator/health**","/actuator/prometheus**",
+                        "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/swagger-ui/index.html",
+                        "/swagger-resources/**", "/webjars/**", "/v2/api-docs"
+                		,"/products/new","/products/authenticate").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/products/**")
                 .authenticated().and()
@@ -57,7 +77,7 @@ public class SecurityConfig {
                 .and()
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .build();*/
     }
 
     @Bean
