@@ -18,11 +18,7 @@ public class ProductService {
 
     List<Product> productList = null;
 
-    @Autowired
-    private UserInfoRepository repository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+   
 
     @PostConstruct
     public void loadProductsFromDB() {
@@ -47,10 +43,5 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("product " + id + " not found"));
     }
 
-
-    public String addUser(UserInfo userInfo) {
-        userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
-        repository.save(userInfo);
-        return "user added to system ";
-    }
+    
 }
