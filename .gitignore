@@ -1,0 +1,66 @@
+### Maven ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/
+mvnw
+mvnw.cmd
+
+### Gradle ###
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+gradlew
+gradlew.bat
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+### Eclipse ###
+.project
+.classpath
+.settings/
+bin/
+
+### STS ###
+.springBeans
+
+### Logs ###
+logs/
+*.log
+
+### OS Files ###
+.DS_Store
+Thumbs.db
+
+### Spring Boot runtime ###
+*.pid
+*.seed
+*.pid.lock
+
+### Environment / Secrets ###
+application-*.yml
+application-*.properties
+.env
+*.env
+
+### Others ###
+*.jar
+*.war
+*.zip
+*.tar
+*.gzip
+
+
+*.class
+bin/
+out/
+target/classes/
+build/
+target/classes/
